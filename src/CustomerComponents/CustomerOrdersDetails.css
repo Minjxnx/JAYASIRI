@@ -8,6 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .CustomerOrderViewPopup-inner {
@@ -21,10 +22,7 @@
     border-radius: 20px;
 }
 
-.CustomerOrderViewPopup-inner .CustomerOrderViewPopup-closebtn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+.customermyorders-button {
     width: 100px;
     height: 40px;
     background-color: #2D31FA;
@@ -34,8 +32,36 @@
     cursor: pointer;
 }
 
-.CustomerOrderViewPopup-closebtn:hover{
+.customermyorders-button:hover{
     border-radius: 10px;
     color: #5d8bfa;
-    background-color: #051367;
+    background-color:  #051367;
+}
+
+.customermyorders-h2 {
+    background-color: #5d8bfa;
+    padding-bottom: 10px;
+}
+
+.customermyorders-label {
+    background-color: #5d8bfa;
+    font-size: 25px;
+}
+
+.customermyorders-input{
+    font-size: 20px;
+    padding-left: 25px;
+}
+
+.customermyorders-select{
+    width: 300px;
+    height: 50px;
+    border-radius: 60px;
+    box-shadow: inset 0px 0px 25px 0px #051367;
+    border: none;
+    outline: none;
+    background-color: #5d8bfa;
+    color: #000;
+    font-size: 20px;
+    padding-left: 25px;
 }

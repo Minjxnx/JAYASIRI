@@ -7,6 +7,7 @@ import CustomerLogin from './CustomerComponents/CustomerPages/CustomerLogin';
 import CustomerSignup from './CustomerComponents/CustomerPages/CustomerSignup';
 import CustomerAddOrder from './CustomerComponents/CustomerPages/CustomerAddOrder';
 import CustomerMyOrders from './CustomerComponents/CustomerPages/CustomerMyOrders';
+import CustomerMyOrdersDetails from './CustomerComponents/CustomerPages/CustomerMyOrderDetails';
 import SupplierLogin from './SupplierComponents/SupplierPages/SupplierLogin';
 import SupplierSignup from './SupplierComponents/SupplierPages/SupplierSignup';
 import SupplierMyOrders from './SupplierComponents/SupplierPages/SupplierMyOrders';
@@ -32,6 +33,7 @@ function App() {
         <Route path='/customersignup' element={<CustomerSignup/>}/>
         <Route path='/customeraddorder' element={<CustomerAddOrder/>}/>
         <Route path='/customermyorders' element={<CustomerMyOrders/>}/>
+        <Route path='/customermyorderdetails' element={<CustomerMyOrdersDetails/>}/>
         <Route path='/supplierlogin' element={<SupplierLogin/>}/>
         <Route path='/suppliersignup' element={<SupplierSignup/>}/>
         <Route path='/suppliermyorders' element={<SupplierMyOrders/>}/>
