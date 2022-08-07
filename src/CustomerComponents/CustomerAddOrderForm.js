@@ -1,9 +1,21 @@
 import React, { useState } from 'react'
 import './CustomerAddOrderForm.css';
+import {db} from '../Firebase-config';
+import {collection,addDoc} from 'firebase/firestore';
 
 function CustomerAddOrderForm() {
 
     const [delivery, setDelivery] = useState("");
+    const [orderDetails, setOrderDetails] = useState("");
+    const [address, setAddress] = useState("");
+    const [prescription, setPrescription] = useState([]);
+
+    const customersCollectionRef = collection(db, "customerOrders");
+
+    const order = async () => {
+        await addDoc(customersCollectionRef, { orderDetails: orderDetails, address: address, deliveryType: delivery});
+        alert("Order Created Successfully!");
+    }
 
     return (
         <>
@@ -13,10 +25,10 @@ function CustomerAddOrderForm() {
                         <div className='CustomerAddOrderForm-details'>
                             <h1 className='CustomerAddOrderForm-heading'>Add Order</h1>
                             <div className='CustomerAddOrderForm-details'>
-                                <input type="file" placeholder="Email" className="CustomerAddOrderForm-name" />
+                                <input type="file" placeholder="file" className="CustomerAddOrderForm-name" />
                             </div>
                             <div className="CustomerAddOrderForm-second-input">
-                                <textarea type="text" placeholder="Order Details" className="CustomerAddOrderForm-name" />
+                                <textarea onChange={(event)=>{setOrderDetails(event.target.value)}} type="text" placeholder="Order Details" className="CustomerAddOrderForm-name" />
                             </div>
                             <br></br>
                             <hr></hr>
@@ -33,14 +45,14 @@ function CustomerAddOrderForm() {
                             {delivery === "Delivery" ? (
                                 <>
                                     <div className="CustomerAddOrderForm-second-input">
-                                        <textarea type="text" placeholder="Enter The Address" className="CustomerAddOrderForm-name" />
+                                        <textarea onChange={(event)=>{setAddress(event.target.value)}} type="text" placeholder="Enter The Address" className="CustomerAddOrderForm-name" />
                                     </div>
                                 </>
                             ) : (
                                 <></>
                             )}
                             <div className="CustomerAddOrderForm-login-button">
-                                <button className='CustomerAddOrderForm-button'>Order</button>
+                                <button onClick={order} className='CustomerAddOrderForm-button'>Order</button>
                             </div>
                         </div>
                     </div>
