@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { db } from '../Firebase-config';
-import { collection, query, getDocs, where,updateDoc } from 'firebase/firestore';
+import { collection, query, getDocs, where,updateDoc,doc } from 'firebase/firestore';
 import './CustomerOrdersDetails.css'
 
 function CustomerOrdersDetails() {

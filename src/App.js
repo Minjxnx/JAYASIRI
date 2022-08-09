@@ -11,6 +11,7 @@ import CustomerMyOrdersDetails from './CustomerComponents/CustomerPages/Customer
 import SupplierLogin from './SupplierComponents/SupplierPages/SupplierLogin';
 import SupplierSignup from './SupplierComponents/SupplierPages/SupplierSignup';
 import SupplierMyOrders from './SupplierComponents/SupplierPages/SupplierMyOrders';
+import SupplierMyOrdersDetails from './SupplierComponents/SupplierPages/SupplierMyOrderDetails';
 import AdminLogin from './AdminComponents/AdminPages/AdminLogin';
 import AdminSignup from './AdminComponents/AdminPages/AdminSignup';
 import AdminCustomerOrders from './AdminComponents/AdminPages/AdminCustomerOrders';
@@ -37,6 +38,7 @@ function App() {
         <Route path='/supplierlogin' element={<SupplierLogin/>}/>
         <Route path='/suppliersignup' element={<SupplierSignup/>}/>
         <Route path='/suppliermyorders' element={<SupplierMyOrders/>}/>
+        <Route path='/suppliermyorderdetails' element={<SupplierMyOrdersDetails/>}/>
         <Route path='/adminlogin' element={<AdminLogin/>}/>
         <Route path='/adminsignup' element={<AdminSignup/>}/>
         <Route path='/admincustomerorders' element={<AdminCustomerOrders/>}/>

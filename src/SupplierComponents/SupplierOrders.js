@@ -1,10 +1,34 @@
-import React,{useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import './SupplierOrders.css'
-import OrderView from '../SupplierComponents/SupplierPopups/SupplierOrderViewPopup';
+import { useNavigate } from 'react-router-dom'
+import { getAuth } from 'firebase/auth';
+import { db } from '../Firebase-config';
+import { collection, query, getDocs, where } from 'firebase/firestore';
 
 function SupplierOrders() {
 
-    const [showPopup, setShowPopup] = useState(false);
+    const [myOrders, setMyOrders] = useState([]);
+    const [scroll, setScroll] = useState(true);
+
+    useEffect(() => {
+        const getOrders = async () => {
+            const auth = getAuth();
+            const user = auth.currentUser;
+            const q1 = query(collection(db, "supplierOrders"), where("uId", "==", user.uid));
+            const data = await getDocs(q1);
+            setMyOrders(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        }
+        getOrders();
+        if (scroll === true) {
+            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+            setScroll(false);
+        }
+    }, [scroll])
+
+    const navigate = useNavigate();
+    const set = (id) => {
+        navigate('/suppliermyorderdetails', { state: { orderID: id } });
+    }
 
     return (
         <>
@@ -16,56 +40,20 @@ function SupplierOrders() {
                         <th className='suppliermyorders-th'>Order Status</th>
                         <th className='suppliermyorders-th'>Action</th>
                     </tr>
-
-                    <tr>
-                        <td className='suppliermyorders-td'>12312312</td>
-                        <td className='suppliermyorders-td'>2022/5/9</td>
-                        <td className='suppliermyorders-td'>Pending</td>
-                        <td className='suppliermyorders-td'>
-                            <button onClick={() => setShowPopup(true)} className='suppliermyorders-button'>View</button>
-                            <OrderView trigger={showPopup} setTrigger={setShowPopup}>
-                                <h2 className='suppliermyorders-h2'>Order Details</h2>
-                                <hr></hr>
-                                <label className='suppliermyorders-label'>Order ID : </label>
-                                <br></br>
-                                <label className='suppliermyorders-label'>Qty : </label>
-                                <br></br>
-                                <label className='suppliermyorders-label'>Order Description : </label>
-                                <br></br>
-                                <label className='suppliermyorders-label'>Order Date : </label>
-                                <br></br>
-                                <hr></hr>
-                                <br></br>
-                                <h2 className='suppliermyorders-h2'>Add Price</h2>
-                                <hr></hr>
-                                <br></br>
-                                <input className='suppliermyorders-input' type='number' placeholder='Price'></input>
-                                <br></br>
-                                <br></br>
-                                <button className='suppliermyorders-button' >Add</button>
-                                <br></br>
-                                <br></br>
-                                <hr></hr>
-                                <br></br>
-                                <h2 className='suppliermyorders-h2'>Order Status</h2>
-                                <hr></hr>
-                                <br></br>
-                                <select className='suppliermyorders-select' >
-                                    <option>Pending</option>
-                                    <option value="Order Confirmed">Order Confirmed</option>
-                                    <option value="Order Rejected">Order Rejected</option>
-                                    <option value="Shipped">Shipped</option>
-                                    <option value="Shipped">Ready to Ship</option>
-                                </select>
-                                <br></br>
-                                <br></br>
-                                <button className='suppliermyorders-button' >Update</button>
-                                <br></br>
-                                <br></br>
-                                <hr></hr>
-                            </OrderView>
-                        </td>
-                    </tr>
+                    {myOrders.map((order) => {
+                        return (
+                            <>
+                                <tr>
+                                    <td className='suppliermyorders-td'>{order.id}</td>
+                                    <td className='suppliermyorders-td'>{order.date}</td>
+                                    <td className='suppliermyorders-td'>{order.status}</td>
+                                    <td className='suppliermyorders-td'>
+                                        <button onClick={() => set(order.id)} className='suppliermyorders-button'>View</button>
+                                    </td>
+                                </tr>
+                            </>
+                        )
+                    })}
                 </table>
             </div>
         </>
