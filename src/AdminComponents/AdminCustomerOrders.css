@@ -36,31 +36,3 @@
     color: #5d8bfa;
     background-color:  #051367;
 }
-
-.admincustomermyorders-h2 {
-    background-color: #5d8bfa;
-    padding-bottom: 10px;
-}
-
-.admincustomermyorders-label {
-    background-color: #5d8bfa;
-    font-size: 25px;
-}
-
-.admincustomermyorders-input{
-    font-size: 20px;
-    padding-left: 25px;
-}
-
-.admincustomermyorders-select{
-    width: 300px;
-    height: 50px;
-    border-radius: 60px;
-    box-shadow: inset 0px 0px 25px 0px #051367;
-    border: none;
-    outline: none;
-    background-color: #5d8bfa;
-    color: #000;
-    font-size: 20px;
-    padding-left: 25px;
-}

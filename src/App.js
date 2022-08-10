@@ -15,6 +15,7 @@ import SupplierMyOrdersDetails from './SupplierComponents/SupplierPages/Supplier
 import AdminLogin from './AdminComponents/AdminPages/AdminLogin';
 import AdminSignup from './AdminComponents/AdminPages/AdminSignup';
 import AdminCustomerOrders from './AdminComponents/AdminPages/AdminCustomerOrders';
+import AdminCustomerOrdersDetails from './AdminComponents/AdminPages/AdminCustomerOrderDetails';
 import AdminSuppliers from './AdminComponents/AdminPages/AdminSuppliers';
 import AdminSupplierOrder  from './AdminComponents/AdminPages/AdminSupplierOrder';
 import AdminSupplierOrdersView from './AdminComponents/AdminPages/AdminSupplierOrdersView';
@@ -42,6 +43,7 @@ function App() {
         <Route path='/adminlogin' element={<AdminLogin/>}/>
         <Route path='/adminsignup' element={<AdminSignup/>}/>
         <Route path='/admincustomerorders' element={<AdminCustomerOrders/>}/>
+        <Route path='/admincustomerorderdetails' element={<AdminCustomerOrdersDetails/>}/>
         <Route path='/adminsuppliers' element={<AdminSuppliers/>}/>
         <Route path='/adminsupplierorder' element={<AdminSupplierOrder/>}/>
         <Route path='/adminsupplierordersview' element={<AdminSupplierOrdersView/>}/>
