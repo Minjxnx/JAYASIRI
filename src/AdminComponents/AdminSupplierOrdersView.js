@@ -1,7 +1,30 @@
 import React from 'react'
 import './AdminSupplierOrdersView.css';
+import { useLocation } from 'react-router-dom'
+import { db } from '../Firebase-config';
+import { collection, query, getDocs, where } from 'firebase/firestore';
 
 function AdminSupplierOrdersView() {
+
+    const [myOrders, setMyOrders] = useState([]);
+    const [scroll, setScroll] = useState(true);
+
+    const location = useLocation();
+
+    const q1 = query(collection(db, "supplierOrders"), where("supplierId", "==", location.state.SupplierID));
+
+    useEffect(() => {
+        const getOrders = async () => {
+            const data = await getDocs(q1);
+            setMyOrders(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        }
+        getOrders();
+        if (scroll === true) {
+            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+            setScroll(false);
+        }
+    }, [scroll, q1])
+
     return (
         <>
 
@@ -15,15 +38,20 @@ function AdminSupplierOrdersView() {
                         <th className='AdminSupplierOrdersView-th'>Order Status</th>
                         <th className='AdminSupplierOrdersView-th'>Total Amount</th>
                     </tr>
-
-                    <tr>
-                        <td className='AdminSupplierOrdersView-td'>12312312</td>
-                        <td className='AdminSupplierOrdersView-td'>12334657</td>
-                        <td className='AdminSupplierOrdersView-td'>2022-05-22</td>
-                        <td className='AdminSupplierOrdersView-td'>ABCDqwqweqweqdsvdsvvs</td>
-                        <td className='AdminSupplierOrdersView-td'>Pending</td>
-                        <td className='AdminSupplierOrdersView-td'>Rs. 5000</td>
-                    </tr>
+                    {myOrders.map((order) => {
+                        return (
+                            <>
+                                <tr>
+                                    <td className='AdminSupplierOrdersView-td'>{order.id}</td>
+                                    <td className='AdminSupplierOrdersView-td'>{location.state.supplierID}</td>
+                                    <td className='AdminSupplierOrdersView-td'>{order.date}</td>
+                                    <td className='AdminSupplierOrdersView-td'>{order.details}</td>
+                                    <td className='AdminSupplierOrdersView-td'>{order.status}</td>
+                                    <td className='AdminSupplierOrdersView-td'>{order.price}</td>
+                                </tr>
+                            </>
+                        )
+                    })}
                 </table>
             </div>
 
