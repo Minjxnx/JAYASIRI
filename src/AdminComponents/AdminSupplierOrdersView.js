@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import './AdminSupplierOrdersView.css';
 import { useLocation } from 'react-router-dom'
 import { db } from '../Firebase-config';

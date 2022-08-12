@@ -1,10 +1,46 @@
-import React,{useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import './AdminStocksView.css';
-import StockView from '../AdminComponents/AdminPopups/AdminStocksUpdatePopup';
+import { useNavigate } from 'react-router-dom'
+import { db } from '../Firebase-config';
+import { collection, query, getDocs, deleteDoc, doc } from 'firebase/firestore';
 
 function AdminStocksView() {
 
-    const [showPopup, setShowPopup] = useState(false);
+    const [stocks, setStocks] = useState([]);
+    const [scroll, setScroll] = useState(true);
+
+    useEffect(() => {
+        const getStocks = async () => {
+            const q1 = query(collection(db, "stocks"));
+            const data = await getDocs(q1);
+            setStocks(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        }
+        getStocks();
+        if (scroll === true) {
+            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+            setScroll(false);
+        }
+    }, [scroll])
+
+    const navigate = useNavigate();
+    const update = (id) => {
+        navigate('/adminstockupdate', { state: { productID: id } });
+    }
+
+    const deleteStock = async (id) => {
+        let confirmAction = window.confirm("Are you Sure to delete the product ?");
+        if (confirmAction) {
+            const item = doc(db, "suppliers", id);
+            await deleteDoc(item).then(() => {
+                alert("Stock removed successfully!");
+                navigate('/adminstocksview')
+            }).catch((err) => {
+                alert(err)
+            })
+        } else {
+            alert("Canceled!")
+        }
+    }
 
     return (
         <>
@@ -19,40 +55,24 @@ function AdminStocksView() {
                         <th className='AdminStocksView-th'>Quantity</th>
                         <th className='AdminStocksView-th'>Action</th>
                     </tr>
-
-                    <tr>
-                        <td className='AdminStocksView-td'>12312312</td>
-                        <td className='AdminStocksView-td'>D15-34-2343</td>
-                        <td className='AdminStocksView-td'>Panadol</td>
-                        <td className='AdminStocksView-td'>20</td>
-                        <td className='AdminStocksView-td'>12</td>
-                        <td className='AdminStocksView-td'>
-                        <button onClick={() => setShowPopup(true)} className='AdminStocksView-button'>Update</button>
-                        &nbsp;
-                        <StockView trigger={showPopup} setTrigger={setShowPopup}>
-                                <h2 className='AdminStocksView-h2'>Update Drug</h2>
-                                <hr></hr>
-                                <br></br>
-                                <input className='adminstocksview-input' placeholder='Drug-ID'/>
-                                <br></br>
-                                <br></br>
-                                <input className='adminstocksview-input' placeholder='Drug-Code'/>
-                                <br></br>
-                                <br></br>
-                                <input className='adminstocksview-input' placeholder='Drug-Name'/>
-                                <br></br>
-                                <br></br>
-                                <input className='adminstocksview-input' placeholder='Price-Per Dozen'/>
-                                <br></br>
-                                <br></br>
-                                <input className='adminstocksview-input' placeholder='Quantity'/>
-                                <br></br>
-                                <br></br>
-                                <button className='AdminStocksView-button'>Update</button>
-                            </StockView>
-                        <button className='AdminStocksView-button'>Delete</button>
-                        </td>
-                    </tr>
+                    {stocks.map((pro) => {
+                        return (
+                            <>
+                                <tr>
+                                    <td className='AdminStocksView-td'>{pro.id}</td>
+                                    <td className='AdminStocksView-td'>{pro.drugCode}</td>
+                                    <td className='AdminStocksView-td'>{pro.drugName}</td>
+                                    <td className='AdminStocksView-td'>{pro.drugPricePerDozen}</td>
+                                    <td className='AdminStocksView-td'>{pro.drugQty}</td>
+                                    <td className='AdminStocksView-td'>
+                                        <button onClick={()=>update(pro.id)} className='AdminStocksView-button'>Update</button>
+                                        &nbsp;
+                                        <button onClick={()=>deleteStock(pro.id)} className='AdminStocksView-button'>Delete</button>
+                                    </td>
+                                </tr>
+                            </>
+                        )
+                    })}
                 </table>
             </div>
 

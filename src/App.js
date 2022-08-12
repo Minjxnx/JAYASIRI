@@ -21,6 +21,7 @@ import AdminSupplierOrder  from './AdminComponents/AdminPages/AdminSupplierOrder
 import AdminSupplierOrdersView from './AdminComponents/AdminPages/AdminSupplierOrdersView';
 import AdminAddStocks from './AdminComponents/AdminPages/AdminAddStocks';
 import AdminStocksView from './AdminComponents/AdminPages/AdminStocks';
+import AdminStockUpdate from './AdminComponents/AdminPages/AdminStocksUpdate';
 import AdminPayments from './AdminComponents/AdminPages/AdminPayments';
 import AdminAddPayment from './AdminComponents/AdminPages/AdminAddPayment';
 
@@ -49,6 +50,7 @@ function App() {
         <Route path='/adminsupplierordersview' element={<AdminSupplierOrdersView/>}/>
         <Route path='/adminaddstocks' element={<AdminAddStocks/>}/>
         <Route path='/adminstocksview' element={<AdminStocksView/>}/>
+        <Route path='/adminstockupdate' element={<AdminStockUpdate/>}/>
         <Route path='/adminpayments' element={<AdminPayments/>}/>
         <Route path='/adminaddpayments' element={<AdminAddPayment/>}/>
       </Routes>
