@@ -1,4 +1,4 @@
-.AdminPaymentsUpdatePopup {
+.AdminPaymentUpdate {
     position: absolute;
     top:0;
     left: 0;
@@ -10,8 +10,8 @@
     align-items: center;
 }
 
-.AdminPaymentsUpdatePopup-inner {
-    top: 700px;
+.AdminPaymentUpdate-inner {
+    top: 0px;
     bottom: 20px;
     position: relative;
     padding: 32px;
@@ -21,11 +21,13 @@
     border-radius: 20px;
 }
 
-.AdminPaymentsUpdatePopup-inner .AdminPaymentsUpdatePopup-closebtn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 100px;
+.AdminPaymentUpdate-input{
+    padding-left: 20px;
+    font-size: 25px;
+}
+
+.AdminPaymentUpdate-button {
+    width: 140px;
     height: 40px;
     background-color: #2D31FA;
     color: #dff6ff;
@@ -34,8 +36,13 @@
     cursor: pointer;
 }
 
-.AdminPaymentsUpdatePopup-closebtn:hover{
+.AdminPaymentUpdate-button:hover{
     border-radius: 10px;
     color: #5d8bfa;
-    background-color: #051367;
+    background-color:  #051367;
+}
+
+.AdminPaymentUpdate-h2 {
+    background-color: #5d8bfa;
+    padding-bottom: 10px;
 }

@@ -24,6 +24,7 @@ import AdminStocksView from './AdminComponents/AdminPages/AdminStocks';
 import AdminStockUpdate from './AdminComponents/AdminPages/AdminStocksUpdate';
 import AdminPayments from './AdminComponents/AdminPages/AdminPayments';
 import AdminAddPayment from './AdminComponents/AdminPages/AdminAddPayment';
+import AdminPaymentUpdate from './AdminComponents/AdminPages/AdminPaymentsUpdate';
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
         <Route path='/adminstockupdate' element={<AdminStockUpdate/>}/>
         <Route path='/adminpayments' element={<AdminPayments/>}/>
         <Route path='/adminaddpayments' element={<AdminAddPayment/>}/>
+        <Route path='/adminpaymentupdate' element={<AdminPaymentUpdate/>}/>
       </Routes>
     </Router>
     </>

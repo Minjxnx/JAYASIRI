@@ -1,10 +1,56 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import './AdminAddPayments.css'
-import ShowPayment from '../AdminComponents/AdminPopups/AdminPaymentsUpdatePopup';
+import { useNavigate } from 'react-router-dom';
+import { db } from '../Firebase-config';
+import { collection, addDoc, query, getDocs, deleteDoc, doc } from 'firebase/firestore';
 
 function AdminAddPayment() {
 
-    const [showPopup, setShowPopup] = useState(false);
+    const [details, setDetails] = useState("");
+    const [price, setPrice] = useState(0);
+
+    const [payments, setPayments] = useState([]);
+    const [scroll, setScroll] = useState(true);
+
+    const paymentsCollectionRef = collection(db, "payments");
+
+    const add = async () => {
+        await addDoc(paymentsCollectionRef, { price: Number(price), details: details });
+        alert("Stock Added Successfully!");
+    }
+
+    useEffect(() => {
+        const getPayments = async () => {
+            const q1 = query(collection(db, "payments"));
+            const data = await getDocs(q1);
+            setPayments(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        }
+        getPayments();
+        if (scroll === true) {
+            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+            setScroll(false);
+        }
+    }, [scroll])
+
+    const deletePayment = async (id) => {
+        let confirmAction = window.confirm("Are you Sure to delete the payment ?");
+        if (confirmAction) {
+            const item = doc(db, "payments", id);
+            await deleteDoc(item).then(() => {
+                alert("Payment removed successfully!");
+                navigate('/adminaddpayments')
+            }).catch((err) => {
+                alert(err)
+            })
+        } else {
+            alert("Canceled!")
+        }
+    }
+
+    const navigate = useNavigate();
+    const update = (id) => {
+        navigate('/adminpaymentupdate', { state: { paymentID: id } });
+    }
 
     return (
         <>
@@ -14,13 +60,13 @@ function AdminAddPayment() {
                         <div className='AdminAddPayments-details'>
                             <h1 className='AdminAddPayments-heading'>Add Other Payments</h1>
                             <div className='AdminAddPayments-details'>
-                                <textarea type="text" placeholder="Payment Details" className="AdminAddPayments-name" />
+                                <textarea onChange={(e) => setDetails(e.target.value)} type="text" placeholder="Payment Details" className="AdminAddPayments-name" />
                             </div>
                             <div className="AdminAddPayments-second-input">
-                                <input type="text" placeholder="Amount" className="AdminAddPayments-name" />
+                                <input onChange={(e) => setPrice(e.target.value)} type="number" placeholder="Amount" className="AdminAddPayments-name" />
                             </div>
                             <div className="AdminAddPayments-login-button">
-                                <button className='AdminAddPayments-button'>Add Payment</button>
+                                <button onClick={add} className='AdminAddPayments-button'>Add Payment</button>
                             </div>
                         </div>
                     </div>
@@ -34,32 +80,22 @@ function AdminAddPayment() {
                         <th className='AdminSupplierOrdersView-th'>Amount</th>
                         <th className='AdminSupplierOrdersView-th'>Action</th>
                     </tr>
-
-                    <tr>
-                        <td className='AdminSupplierOrdersView-td'>12312312</td>
-                        <td className='AdminSupplierOrdersView-td'>Drug Covers</td>
-                        <td className='AdminSupplierOrdersView-td'>Rs. 5000</td>
-                        <td className='AdminSupplierOrdersView-td'>
-                            <button onClick={() => setShowPopup(true)} className='AdminAddPayments-btn'>Update</button>
-                            <ShowPayment trigger={showPopup} setTrigger={setShowPopup}>
-                                <h2 className='AdminStocksView-h2'>Update Drug</h2>
-                                <hr></hr>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <input className='adminstocksview-input' placeholder='Payment-Details'/>
-                                <br></br>
-                                <br></br>
-                                <input className='adminstocksview-input' placeholder='Price'/>
-                                <br></br>
-                                <br></br>
-                                <br></br>
-                                <button className='AdminStocksView-button'>Update</button>
-                            </ShowPayment>
-                            &nbsp;&nbsp;&nbsp;
-                            <button className='AdminAddPayments-btn'>Delete</button>
-                        </td>
-                    </tr>
+                    {payments.map((pay) => {
+                        return (
+                            <>
+                                <tr>
+                                    <td className='AdminSupplierOrdersView-td'>{pay.id}</td>
+                                    <td className='AdminSupplierOrdersView-td'>{pay.details}</td>
+                                    <td className='AdminSupplierOrdersView-td'>{pay.price}</td>
+                                    <td className='AdminSupplierOrdersView-td'>
+                                        <button onClick={()=>update(pay.id)} className='AdminAddPayments-btn'>Update</button>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <button onClick={()=>deletePayment(pay.id)} className='AdminAddPayments-btn'>Delete</button>
+                                    </td>
+                                </tr>
+                            </>
+                        )
+                    })}
                 </table>
             </div>
         </>
