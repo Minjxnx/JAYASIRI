@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import './AdminPayments.css'
 import { Link } from 'react-router-dom';
 import { db } from '../Firebase-config';

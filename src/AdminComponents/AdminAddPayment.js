@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './AdminAddPayments.css'
 import { useNavigate } from 'react-router-dom';
 import { db } from '../Firebase-config';

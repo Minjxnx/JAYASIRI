@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import './App.css';
 import { BrowserRouter as Router,Route,Routes} from 'react-router-dom'; 
 import Home from './Components/Home';
@@ -27,17 +27,20 @@ import AdminAddPayment from './AdminComponents/AdminPages/AdminAddPayment';
 import AdminPaymentUpdate from './AdminComponents/AdminPages/AdminPaymentsUpdate';
 
 function App() {
+
+  const [isAuth, setIsAuth] = useState(false);
+
   return (
     <>
     <Router>
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/chooseuser' element={<Chooser/>}/>
-        <Route path='/customerlogin' element={<CustomerLogin/>}/>
-        <Route path='/customersignup' element={<CustomerSignup/>}/>
-        <Route path='/customeraddorder' element={<CustomerAddOrder/>}/>
-        <Route path='/customermyorders' element={<CustomerMyOrders/>}/>
-        <Route path='/customermyorderdetails' element={<CustomerMyOrdersDetails/>}/>
+        <Route path='/customerlogin' element={<CustomerLogin setIsAuth={setIsAuth}/>}/>
+        <Route path='/customersignup' element={<CustomerSignup setIsAuth={setIsAuth}/>}/>
+        <Route path='/customeraddorder' element={<CustomerAddOrder isAuth={isAuth}/>}/>
+        <Route path='/customermyorders' element={<CustomerMyOrders isAuth={isAuth}/>}/>
+        <Route path='/customermyorderdetails' element={<CustomerMyOrdersDetails isAuth={isAuth}/>}/>
         <Route path='/supplierlogin' element={<SupplierLogin/>}/>
         <Route path='/suppliersignup' element={<SupplierSignup/>}/>
         <Route path='/suppliermyorders' element={<SupplierMyOrders/>}/>

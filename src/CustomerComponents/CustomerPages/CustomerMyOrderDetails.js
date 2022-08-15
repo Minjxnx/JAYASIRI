@@ -2,11 +2,17 @@ import React from 'react'
 import Navbar from '../CustomerNavbar';
 import Details from '../CustomerOrdersDetails';
 
-function CustomerMyOrderDetails() {
+function CustomerMyOrderDetails({ isAuth }) {
   return (
     <>
-      <Navbar/>
-      <Details/>
+      {isAuth ? (
+        <>
+          <Navbar />
+          <Details />
+        </>
+      ) : (<>
+        {window.location.pathname = '/customerlogin'}
+      </>)}
     </>
   )
 }

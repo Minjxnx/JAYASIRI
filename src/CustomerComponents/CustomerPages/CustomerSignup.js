@@ -1,10 +1,10 @@
 import React from 'react'
 import CustomerSignupForm from '../CustomerSignupForm';
 
-function CustomerSignup() {
+function CustomerSignup({setIsAuth}) {
   return (
     <>
-        <CustomerSignupForm/>
+        <CustomerSignupForm setIsAuth={setIsAuth}/>
     </>
   )
 }
