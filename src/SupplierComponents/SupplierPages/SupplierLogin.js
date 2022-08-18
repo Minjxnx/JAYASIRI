@@ -1,10 +1,10 @@
 import React from 'react'
 import SupplierLoginForm from '../SupplierLoginForm';
 
-function SupplierLogin() {
+function SupplierLogin({setSupplierAuth}) {
   return (
     <>
-        <SupplierLoginForm/>
+        <SupplierLoginForm setSupplierAuth={setSupplierAuth}/>
     </>
   )
 }

@@ -2,11 +2,15 @@ import React from 'react'
 import NavBar from '../SupplierNavbar';
 import SupplierOrders from '../SupplierOrders';
 
-function SupplierMyOrders() {
+function SupplierMyOrders({ supplierAuth }) {
   return (
     <>
-      <NavBar/>
-      <SupplierOrders/>
+      {supplierAuth ? (<>
+        <NavBar />
+        <SupplierOrders />
+      </>) : (<>
+        {window.location.pathname = '/supplierlogin'}
+      </>)}
     </>
   )
 }

@@ -1,7 +1,23 @@
-import React from 'react'
+import React,{useState} from 'react'
 import './SupplierSignupForm.css';
+import { db } from '../Firebase-config';
+import {addDoc,collection} from 'firebase/firestore';
 
 function SupplierSignupForm() {
+
+    const [registerEmail, setRegisterEmail] = useState("");
+    const [registerPassword, setRegisterPassword] = useState("");
+    const [companyName, setCompanyName] = useState("");
+
+    const supplierUsersCollectionRef = collection(db, "supplierUsers");
+
+    const register = async () => {
+        
+       await addDoc(supplierUsersCollectionRef, {email:registerEmail,password:registerPassword,companyName:companyName});
+       alert("New admin created successfully");
+
+    }
+
   return (
     <>
       <div className="supplier-signup-form-main">
@@ -15,16 +31,16 @@ function SupplierSignupForm() {
                         <div className='supplier-signup-form-details'>
                             <h1 className='supplier-signup-form-heading'>Supplier Sign-up</h1>
                             <div className='supplier-signup-form-details'>
-                                <input type="text" placeholder="Company Name" className="supplier-signup-form-name" />
+                                <input onChange={(event) => { setCompanyName(event.target.value); }} type="text" placeholder="Company Name" className="supplier-signup-form-name" />
                             </div>
                             <div className="supplier-signup-form-second-input">
-                                <input type="text" placeholder="Email" className="supplier-signup-form-name" />
+                                <input onChange={(event) => { setRegisterEmail(event.target.value); }} type="text" placeholder="Email" className="supplier-signup-form-name" />
                             </div>
                             <div className="supplier-signup-form-second-input">
-                                <input type="password" placeholder="Password" className="supplier-signup-form-name" />
+                                <input onChange={(event) => { setRegisterPassword(event.target.value); }} type="password" placeholder="Password" className="supplier-signup-form-name" />
                             </div>
                             <div className="supplier-signup-form-login-button">
-                                <button className='supplier-signup-form-button'>Sign-up</button>
+                                <button onClick={register} className='supplier-signup-form-button'>Sign-up</button>
                             </div>
                         </div>
                     </div>
