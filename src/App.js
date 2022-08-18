@@ -30,6 +30,7 @@ function App() {
 
   const [isAuth, setIsAuth] = useState(false);
   const [supplierAuth, setSupplierAuth] = useState(false);
+  const [supplierId, setSupplierId] = useState("");
 
   return (
     <>
@@ -42,9 +43,9 @@ function App() {
         <Route path='/customeraddorder' element={<CustomerAddOrder isAuth={isAuth}/>}/>
         <Route path='/customermyorders' element={<CustomerMyOrders isAuth={isAuth}/>}/>
         <Route path='/customermyorderdetails' element={<CustomerMyOrdersDetails isAuth={isAuth}/>}/>
-        <Route path='/supplierlogin' element={<SupplierLogin setSupplierAuth={setSupplierAuth}/>}/>
+        <Route path='/supplierlogin' element={<SupplierLogin setSupplierAuth={setSupplierAuth} setSupplierId={setSupplierId}/>}/>
         <Route path='/suppliersignup' element={<SupplierSignup/>}/>
-        <Route path='/suppliermyorders' element={<SupplierMyOrders supplierAuth={supplierAuth}/>}/>
+        <Route path='/suppliermyorders' element={<SupplierMyOrders supplierAuth={supplierAuth} supplierId={supplierId}/>}/>
         <Route path='/suppliermyorderdetails' element={<SupplierMyOrdersDetails supplierAuth={supplierAuth}/>}/>
         <Route path='/adminlogin' element={<AdminLogin/>}/>
         <Route path='/adminsignup' element={<AdminSignup/>}/>

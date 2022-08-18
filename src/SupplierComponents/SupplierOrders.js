@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import './SupplierOrders.css'
-import { useNavigate } from 'react-router-dom'
-import { getAuth } from 'firebase/auth';
+import './SupplierOrders.css';
+import { useNavigate } from 'react-router-dom';
 import { db } from '../Firebase-config';
 import { collection, query, getDocs, where } from 'firebase/firestore';
 
-function SupplierOrders() {
+function SupplierOrders({supplierId}) {
 
     const [myOrders, setMyOrders] = useState([]);
     const [scroll, setScroll] = useState(true);
 
     useEffect(() => {
         const getOrders = async () => {
-            const auth = getAuth();
-            const user = auth.currentUser;
-            const q1 = query(collection(db, "supplierOrders"), where("uId", "==", user.uid));
+            const q1 = query(collection(db, "supplierOrders"), where("uId", "==", supplierId));
             const data = await getDocs(q1);
             setMyOrders(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
         }

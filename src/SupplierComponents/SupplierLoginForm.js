@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { db } from '../Firebase-config';
 import {collection,getDocs} from 'firebase/firestore';
 
-function SupplierLoginForm({ setSupplierAuth }) {
+function SupplierLoginForm({ setSupplierAuth, setSupplierId }) {
 
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
@@ -29,6 +29,7 @@ function SupplierLoginForm({ setSupplierAuth }) {
             if(registerEmail===user.email && registerPassword===user.password){
                 localStorage.setItem("SupplierAuth", true);
                 setSupplierAuth(true);
+                setSupplierId(user.id);
                 alert("Signed in successfully!");
                 navigate('/suppliermyorders');
             }
