@@ -12,7 +12,7 @@ function AdminSuppliers() {
 
     useEffect(() => {
         const getOrders = async () => {
-            const q1 = query(collection(db, "suppliers"));
+            const q1 = query(collection(db, "supplierUsers"));
             const data = await getDocs(q1);
             setSuppliers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
         }

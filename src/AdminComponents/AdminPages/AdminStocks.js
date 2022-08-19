@@ -2,11 +2,15 @@ import React from 'react'
 import Navbar from '../AdminNavbar';
 import View from '../AdminStocksView';
 
-function AdminStocks() {
+function AdminStocks({adminAuth}) {
   return (
     <>
-      <Navbar/>
-      <View/>
+      {adminAuth ? (<>
+        <Navbar />
+        <View />
+      </>) : (<>
+        {window.location.pathname = '/adminlogin'}
+      </>)}
     </>
   )
 }

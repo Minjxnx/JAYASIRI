@@ -2,11 +2,15 @@ import React from 'react'
 import Navbar from '../AdminNavbar';
 import Payment from '../AdminPayments';
 
-function AdminPayments() {
+function AdminPayments({adminAuth}) {
   return (
     <>
-      <Navbar/>
-      <Payment/>
+      {adminAuth ? (<>
+        <Navbar />
+        <Payment />
+      </>) : (<>
+        {window.location.pathname = '/adminlogin'}
+      </>)}
     </>
   )
 }

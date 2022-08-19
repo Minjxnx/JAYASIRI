@@ -2,11 +2,15 @@ import React from 'react'
 import Navbar from '../AdminNavbar';
 import Details from '../AdminCustomerOrdersDetails';
 
-function AdminCustomerOrderDetails() {
+function AdminCustomerOrderDetails({adminAuth}) {
   return (
     <>
-      <Navbar/>
-      <Details/>
+      {adminAuth ? (<>
+        <Navbar />
+        <Details />
+      </>) : (<>
+        {window.location.pathname = '/adminlogin'}
+      </>)}
     </>
   )
 }

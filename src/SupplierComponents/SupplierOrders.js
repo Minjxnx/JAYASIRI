@@ -9,9 +9,10 @@ function SupplierOrders({supplierId}) {
     const [myOrders, setMyOrders] = useState([]);
     const [scroll, setScroll] = useState(true);
 
+    const q1 = query(collection(db, "supplierOrders"), where("uId", "==", supplierId));
+
     useEffect(() => {
         const getOrders = async () => {
-            const q1 = query(collection(db, "supplierOrders"), where("uId", "==", supplierId));
             const data = await getDocs(q1);
             setMyOrders(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
         }
@@ -20,7 +21,7 @@ function SupplierOrders({supplierId}) {
             window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
             setScroll(false);
         }
-    }, [scroll])
+    }, [scroll,q1])
 
     const navigate = useNavigate();
     const set = (id) => {

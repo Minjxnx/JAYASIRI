@@ -2,11 +2,15 @@ import React from 'react'
 import Navbar from '../AdminNavbar';
 import Form from '../AdminAddStocksForm';
 
-function AdminAddStocks() {
+function AdminAddStocks({adminAuth}) {
   return (
     <>
-      <Navbar/>
-      <Form/>
+      {adminAuth ? (<>
+        <Navbar />
+        <Form />
+      </>) : (<>
+        {window.location.pathname = '/adminlogin'}
+      </>)}
     </>
   )
 }

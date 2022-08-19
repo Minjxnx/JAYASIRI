@@ -31,6 +31,7 @@ function App() {
   const [isAuth, setIsAuth] = useState(false);
   const [supplierAuth, setSupplierAuth] = useState(false);
   const [supplierId, setSupplierId] = useState("");
+  const [adminAuth, setAdminAuth] = useState(false);
 
   return (
     <>
@@ -44,22 +45,22 @@ function App() {
         <Route path='/customermyorders' element={<CustomerMyOrders isAuth={isAuth}/>}/>
         <Route path='/customermyorderdetails' element={<CustomerMyOrdersDetails isAuth={isAuth}/>}/>
         <Route path='/supplierlogin' element={<SupplierLogin setSupplierAuth={setSupplierAuth} setSupplierId={setSupplierId}/>}/>
-        <Route path='/suppliersignup' element={<SupplierSignup/>}/>
+        <Route path='/suppliersignup' element={<SupplierSignup adminAuth={adminAuth}/>}/>
         <Route path='/suppliermyorders' element={<SupplierMyOrders supplierAuth={supplierAuth} supplierId={supplierId}/>}/>
         <Route path='/suppliermyorderdetails' element={<SupplierMyOrdersDetails supplierAuth={supplierAuth}/>}/>
-        <Route path='/adminlogin' element={<AdminLogin/>}/>
-        <Route path='/adminsignup' element={<AdminSignup/>}/>
-        <Route path='/admincustomerorders' element={<AdminCustomerOrders/>}/>
-        <Route path='/admincustomerorderdetails' element={<AdminCustomerOrdersDetails/>}/>
-        <Route path='/adminsuppliers' element={<AdminSuppliers/>}/>
-        <Route path='/adminsupplierorder' element={<AdminSupplierOrder/>}/>
-        <Route path='/adminsupplierordersview' element={<AdminSupplierOrdersView/>}/>
-        <Route path='/adminaddstocks' element={<AdminAddStocks/>}/>
-        <Route path='/adminstocksview' element={<AdminStocksView/>}/>
-        <Route path='/adminstockupdate' element={<AdminStockUpdate/>}/>
-        <Route path='/adminpayments' element={<AdminPayments/>}/>
-        <Route path='/adminaddpayments' element={<AdminAddPayment/>}/>
-        <Route path='/adminpaymentupdate' element={<AdminPaymentUpdate/>}/>
+        <Route path='/adminlogin' element={<AdminLogin setAdminAuth={setAdminAuth}/>}/>
+        <Route path='/adminsignup' element={<AdminSignup adminAuth={adminAuth}/>}/>
+        <Route path='/admincustomerorders' element={<AdminCustomerOrders adminAuth={adminAuth}/>}/>
+        <Route path='/admincustomerorderdetails' element={<AdminCustomerOrdersDetails adminAuth={adminAuth}/>}/>
+        <Route path='/adminsuppliers' element={<AdminSuppliers adminAuth={adminAuth}/>}/>
+        <Route path='/adminsupplierorder' element={<AdminSupplierOrder adminAuth={adminAuth}/>}/>
+        <Route path='/adminsupplierordersview' element={<AdminSupplierOrdersView adminAuth={adminAuth}/>}/>
+        <Route path='/adminaddstocks' element={<AdminAddStocks adminAuth={adminAuth}/>}/>
+        <Route path='/adminstocksview' element={<AdminStocksView adminAuth={adminAuth}/>}/>
+        <Route path='/adminstockupdate' element={<AdminStockUpdate adminAuth={adminAuth}/>}/>
+        <Route path='/adminpayments' element={<AdminPayments adminAuth={adminAuth}/>}/>
+        <Route path='/adminaddpayments' element={<AdminAddPayment adminAuth={adminAuth}/>}/>
+        <Route path='/adminpaymentupdate' element={<AdminPaymentUpdate adminAuth={adminAuth}/>}/>
       </Routes>
     </Router>
     </>

@@ -1,10 +1,10 @@
 import React from 'react'
 import AdminLoginForm from '../AdminLoginForm'
 
-function AdminLogin() {
+function AdminLogin({setAdminAuth}) {
   return (
     <>
-      <AdminLoginForm />
+      <AdminLoginForm setAdminAuth={setAdminAuth}/>
     </>
   )
 }

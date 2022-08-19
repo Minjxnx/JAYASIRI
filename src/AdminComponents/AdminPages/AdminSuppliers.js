@@ -2,11 +2,15 @@ import React from 'react'
 import Suppliers from '../AdminSuppliers'
 import Navbar from '../AdminNavbar';
 
-function AdminSuppliers() {
+function AdminSuppliers({adminAuth}) {
   return (
     <>
-      <Navbar/>
-      <Suppliers/>
+      {adminAuth ? (<>
+        <Navbar />
+        <Suppliers />
+      </>) : (<>
+        {window.location.pathname = '/adminlogin'}
+      </>)}
     </>
   )
 }
