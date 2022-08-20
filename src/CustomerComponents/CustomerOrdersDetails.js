@@ -60,7 +60,7 @@ function CustomerOrdersDetails() {
                             <br></br>
                             <select onChange={(e)=>setOrderStatus(e.target.value)} className='customermyorders-select' >
                                 <option></option>
-                                <option value="Order Rejected">Order Received</option>
+                                <option value="Order Received">Order Received</option>
                             </select>
                             <br></br>
                             <br></br>

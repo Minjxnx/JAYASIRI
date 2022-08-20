@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import './CustomerSignupForm.css';
 import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
-import {auth,googleProvider,facebookProvider,twitterProvider} from '../Firebase-config';
+import {auth,googleProvider,facebookProvider} from '../Firebase-config';
 import {useNavigate} from "react-router-dom";
 
 function CustomerSignupForm({setIsAuth}) {
@@ -53,18 +53,6 @@ function CustomerSignupForm({setIsAuth}) {
         })
     }
 
-    const twitterRegister = () =>{
-        signInWithPopup(auth,twitterProvider).then(()=>{
-            setIsAuth(true);
-            localStorage.setItem("isAuth",true);
-            navigate("/customeraddorder");
-        })
-        .catch((error)=>{
-            const errorMessage = error.message;
-            alert(errorMessage);
-        })
-    }
-
   return (
     <>
         <div className="customer-signup-form-main">
@@ -92,9 +80,6 @@ function CustomerSignupForm({setIsAuth}) {
                                 </div>
                                 <div className='customer-signup-single-logos'>
                                     <img onClick={facebookRegister}  alt='' src={process.env.PUBLIC_URL + "Logos/FacebookLogo.png"}></img>
-                                </div>
-                                <div className='customer-signup-single-logos4'>
-                                    <img onClick={twitterRegister} alt='' src={process.env.PUBLIC_URL + "Logos/TwitterLogo.png"}></img>
                                 </div>
                             </div>
                             <p className="customer-signup-form-link">

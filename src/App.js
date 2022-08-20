@@ -18,7 +18,7 @@ import AdminCustomerOrders from './AdminComponents/AdminPages/AdminCustomerOrder
 import AdminCustomerOrdersDetails from './AdminComponents/AdminPages/AdminCustomerOrderDetails';
 import AdminSuppliers from './AdminComponents/AdminPages/AdminSuppliers';
 import AdminSupplierOrder  from './AdminComponents/AdminPages/AdminSupplierOrder';
-import AdminSupplierOrdersView from './AdminComponents/AdminPages/AdminSupplierOrdersView';
+import AdminSupplierMyOrdersView from './AdminComponents/AdminPages/AdminSupplierMyOrdersView';
 import AdminAddStocks from './AdminComponents/AdminPages/AdminAddStocks';
 import AdminStocksView from './AdminComponents/AdminPages/AdminStocks';
 import AdminStockUpdate from './AdminComponents/AdminPages/AdminStocksUpdate';
@@ -54,7 +54,7 @@ function App() {
         <Route path='/admincustomerorderdetails' element={<AdminCustomerOrdersDetails adminAuth={adminAuth}/>}/>
         <Route path='/adminsuppliers' element={<AdminSuppliers adminAuth={adminAuth}/>}/>
         <Route path='/adminsupplierorder' element={<AdminSupplierOrder adminAuth={adminAuth}/>}/>
-        <Route path='/adminsupplierordersview' element={<AdminSupplierOrdersView adminAuth={adminAuth}/>}/>
+        <Route path='/adminsuppliermyordersview' element={<AdminSupplierMyOrdersView adminAuth={adminAuth}/>}/>
         <Route path='/adminaddstocks' element={<AdminAddStocks adminAuth={adminAuth}/>}/>
         <Route path='/adminstocksview' element={<AdminStocksView adminAuth={adminAuth}/>}/>
         <Route path='/adminstockupdate' element={<AdminStockUpdate adminAuth={adminAuth}/>}/>

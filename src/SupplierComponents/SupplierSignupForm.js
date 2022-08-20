@@ -14,7 +14,7 @@ function SupplierSignupForm() {
     const register = async () => {
         
        await addDoc(supplierUsersCollectionRef, {email:registerEmail,password:registerPassword,companyName:companyName});
-       alert("New admin created successfully");
+       alert("New Supplier created successfully");
 
     }
 

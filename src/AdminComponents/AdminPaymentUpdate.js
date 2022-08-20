@@ -6,14 +6,15 @@ import { collection, query, getDocs, where, updateDoc, doc } from 'firebase/fire
 
 function AdminPaymentUpdate() {
 
+    const location = useLocation();
+
     const [payment, setPayment] = useState([]);
     const [scroll, setScroll] = useState(true);
 
-    const [details, setDetails] = useState("");
-    const [price, setPrice] = useState(0);
-
-    const location = useLocation();
-    const q1 = query(collection(db, "payments"), where("__name__", "==", location.state.aymentID));
+    const [details, setDetails] = useState(location.state.details);
+    const [price, setPrice] = useState(location.state.price);
+    
+    const q1 = query(collection(db, "payments"), where("__name__", "==", location.state.paymentID));
 
     useEffect(() => {
         const getPayment = async () => {
@@ -42,8 +43,6 @@ function AdminPaymentUpdate() {
     return (
         <div className='AdminPaymentUpdate'>
             {payment.map((pay) => {
-                setDetails(pay.details)
-                setPrice(pay.price)
                 return (
                     <>
                         <div className='AdminPaymentUpdate-inner'>
@@ -55,7 +54,7 @@ function AdminPaymentUpdate() {
                             <input defaultValue={pay.details} type="text" onChange={(e) => setDetails(e.target.value)} className='AdminPaymentUpdate-input' placeholder='Payment-Details' />
                             <br></br>
                             <br></br>
-                            <input value={pay.price} type="number" onChange={(e) => setPrice(e.target.value)} className='AdminPaymentUpdate-input' placeholder='Price' />
+                            <input defaultValue={pay.price} type="number" onChange={(e) => setPrice(e.target.value)} className='AdminPaymentUpdate-input' placeholder='Price' />
                             <br></br>
                             <br></br>
                             <br></br>

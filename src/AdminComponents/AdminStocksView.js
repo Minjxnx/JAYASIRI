@@ -23,14 +23,14 @@ function AdminStocksView() {
     }, [scroll])
 
     const navigate = useNavigate();
-    const update = (id) => {
-        navigate('/adminstockupdate', { state: { productID: id } });
+    const update = (id,code,name,price,qty) => {
+        navigate('/adminstockupdate', { state: { productID: id,drugCode:code,drugName:name,drugPricePerDozen:price,drugQty:qty } });
     }
 
     const deleteStock = async (id) => {
         let confirmAction = window.confirm("Are you Sure to delete the product ?");
         if (confirmAction) {
-            const item = doc(db, "suppliers", id);
+            const item = doc(db, "stocks", id);
             await deleteDoc(item).then(() => {
                 alert("Stock removed successfully!");
                 navigate('/adminstocksview')
@@ -65,7 +65,7 @@ function AdminStocksView() {
                                     <td className='AdminStocksView-td'>{pro.drugPricePerDozen}</td>
                                     <td className='AdminStocksView-td'>{pro.drugQty}</td>
                                     <td className='AdminStocksView-td'>
-                                        <button onClick={()=>update(pro.id)} className='AdminStocksView-button'>Update</button>
+                                        <button onClick={()=>update(pro.id,pro.drugCode,pro.drugName,pro.drugPricePerDozen,pro.drugQty)} className='AdminStocksView-button'>Update</button>
                                         &nbsp;
                                         <button onClick={()=>deleteStock(pro.id)} className='AdminStocksView-button'>Delete</button>
                                     </td>

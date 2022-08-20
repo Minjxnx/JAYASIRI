@@ -29,13 +29,13 @@ function AdminSuppliers() {
     }
 
     const view = (id) => {
-        navigate('/adminsupplierordersview', { state: { supplierID: id } });
+        navigate('/adminsuppliermyordersview', { state: { supplierID: id } });
     }
 
     const deleteSupplier = async (id) => {
         let confirmAction = window.confirm("Are you Sure to delete the supplier ?");
         if (confirmAction) {
-            const item = doc(db, "suppliers", id);
+            const item = doc(db, "supplierUsers", id);
             await deleteDoc(item).then(() => {
                 alert("Supplier removed successfully!");
                 navigate('/adminsuppliers')

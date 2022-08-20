@@ -6,16 +6,17 @@ import { collection, query, getDocs, where, updateDoc, doc } from 'firebase/fire
 
 function AdminStockUpdate() {
 
+    const location = useLocation();
+
     const [stock, setStock] = useState([]);
     const [scroll, setScroll] = useState(true);
 
-    const [drugCode, setDrugCode] = useState("");
-    const [drugName, setDrugName] = useState("");
-    const [drugPricePerDozen, setDrugPricePerDozen] = useState();
-    const [drugQty, setDrugQty] = useState();
+    const [drugCode, setDrugCode] = useState(location.state.drugCode);
+    const [drugName, setDrugName] = useState(location.state.drugName);
+    const [drugPricePerDozen, setDrugPricePerDozen] = useState(location.state.drugPricePerDozen);
+    const [drugQty, setDrugQty] = useState(location.state.drugQty);
 
-    const location = useLocation();
-    const q1 = query(collection(db, "customerOrders"), where("__name__", "==", location.state.productID));
+    const q1 = query(collection(db, "stocks"), where("__name__", "==", location.state.productID));
 
     useEffect(() => {
         const getStock = async () => {
@@ -34,8 +35,12 @@ function AdminStockUpdate() {
         if (confirmAction) {
             const productDoc = doc(db, "stocks", location.state.productID)
             const newFields = { drugCode:drugCode,drugName:drugName,drugPricePerDozen:Number(drugPricePerDozen),drugQty:Number(drugQty) };
-            await updateDoc(productDoc, newFields);
-            alert("Stock Updated!");
+            await updateDoc(productDoc, newFields).then((re)=>{
+                alert("Stock Updated!");
+            }).catch((err)=>{
+                alert(err);
+            })
+            
         } else {
             alert("Canceled!");
         }
@@ -44,10 +49,6 @@ function AdminStockUpdate() {
     return (
         <div className='AdminStockUpdate'>
             {stock.map((stock) => {
-                setDrugCode(stock.drugCode);
-                setDrugName(stock.drugName);
-                setDrugPricePerDozen(stock.drugPricePerDozen);
-                setDrugQty(stock.drugQty);
                 return (
                     <>
                         <div className='AdminStockUpdate-inner'>
@@ -63,10 +64,10 @@ function AdminStockUpdate() {
                             <input defaultValue={stock.drugName} onChange={(e)=>setDrugName(e.target.value)} type="text" className='AdminStockUpdate-input' placeholder='Drug-Name' />
                             <br></br>
                             <br></br>
-                            <input Value={stock.drugPricePerDozen} onChange={(e)=>setDrugPricePerDozen(e.target.value)} type="number" className='AdminStockUpdate-input' placeholder='Price-Per Dozen' />
+                            <input defaultValue={stock.drugPricePerDozen} onChange={(e)=>setDrugPricePerDozen(e.target.value)} type="number" className='AdminStockUpdate-input' placeholder='Price-Per Dozen' />
                             <br></br>
                             <br></br>
-                            <input value={stock.drugQty} onChange={(e)=>setDrugQty(e.target.value)} type="number" className='AdminStockUpdate-input' placeholder='Quantity' />
+                            <input defaultValue={stock.drugQty} onChange={(e)=>setDrugQty(e.target.value)} type="number" className='AdminStockUpdate-input' placeholder='Quantity' />
                             <br></br>
                             <br></br>
                             <button onClick={editStock} className='AdminStockUpdate-button'>Update</button>

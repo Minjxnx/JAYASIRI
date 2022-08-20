@@ -11,7 +11,7 @@ function AdminSupplierOrdersView() {
 
     const location = useLocation();
 
-    const q1 = query(collection(db, "supplierOrders"), where("supplierId", "==", location.state.SupplierID));
+    const q1 = query(collection(db, "supplierOrders"), where("supplierId", "==", location.state.supplierID));
 
     useEffect(() => {
         const getOrders = async () => {

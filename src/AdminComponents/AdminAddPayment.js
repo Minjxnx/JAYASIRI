@@ -48,8 +48,8 @@ function AdminAddPayment() {
     }
 
     const navigate = useNavigate();
-    const update = (id) => {
-        navigate('/adminpaymentupdate', { state: { paymentID: id } });
+    const update = (id,details,price) => {
+        navigate('/adminpaymentupdate', { state: { paymentID: id,details:details,price:price } });
     }
 
     return (
@@ -88,7 +88,7 @@ function AdminAddPayment() {
                                     <td className='AdminSupplierOrdersView-td'>{pay.details}</td>
                                     <td className='AdminSupplierOrdersView-td'>{pay.price}</td>
                                     <td className='AdminSupplierOrdersView-td'>
-                                        <button onClick={()=>update(pay.id)} className='AdminAddPayments-btn'>Update</button>
+                                        <button onClick={()=>update(pay.id,pay.details,pay.price)} className='AdminAddPayments-btn'>Update</button>
                                         &nbsp;&nbsp;&nbsp;
                                         <button onClick={()=>deletePayment(pay.id)} className='AdminAddPayments-btn'>Delete</button>
                                     </td>
