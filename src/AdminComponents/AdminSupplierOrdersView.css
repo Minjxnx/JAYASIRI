@@ -3,8 +3,8 @@
     height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
     background-color: #dff6ff;
+    padding-top: 20px;
 }
 
 .AdminSupplierOrdersView-table {

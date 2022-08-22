@@ -51,7 +51,7 @@ function AdminCustomerOrdersDetails() {
                             <hr></hr>
                             <label className='admincustomermyorders-label'>Order ID : {order.id}</label>
                             <br></br>
-                            <label className='admincustomermyorders-label'>Order Description : {order.OrderDetails}</label>
+                            <label className='admincustomermyorders-label'>Order Description : {order.orderDetails}</label>
                             <br></br>
                             <label className='admincustomermyorders-label'>Order Date : {order.orderDate}</label>
                             <br></br>

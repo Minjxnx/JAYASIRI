@@ -8,6 +8,9 @@ function AdminStocksView() {
 
     const [stocks, setStocks] = useState([]);
     const [scroll, setScroll] = useState(true);
+    const [search, setSearch] = useState("");
+
+    const filteredStocks = stocks.filter(stock => stock.drugName.toLowerCase().includes(search.toLowerCase()));
 
     useEffect(() => {
         const getStocks = async () => {
@@ -44,7 +47,11 @@ function AdminStocksView() {
 
     return (
         <>
-
+        <h1 className='AdminStocksView-h1'>Stocks</h1>
+            
+            <div className='AdminStocksView-filter'>
+                <input className='AdminStockView-input' onChange={(e) => setSearch(e.target.value)} placeholder="Search by Drug Name" type="text" />
+            </div>
             <div className='AdminStocksView-main'>
                 <table className='AdminStocksView-table'>
                     <tr>
@@ -55,7 +62,7 @@ function AdminStocksView() {
                         <th className='AdminStocksView-th'>Quantity</th>
                         <th className='AdminStocksView-th'>Action</th>
                     </tr>
-                    {stocks.map((pro) => {
+                    {filteredStocks.map((pro) => {
                         return (
                             <>
                                 <tr>

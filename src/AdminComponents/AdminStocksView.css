@@ -1,16 +1,34 @@
+.AdminStocksView-h1{
+    text-align: center;
+    background-color: #dff6ff;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.AdminStocksView-filter{
+    background-color: #dff6ff;
+    text-align: center;
+}
+
+.AdminStockView-input{
+    padding-left: 30px;
+    font-size: 20px;
+}
+
 .AdminStocksView-main {
     width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
     background-color: #dff6ff;
+    padding-top: 20px;
 }
 
 .AdminStocksView-table {
     border: 1px solid #5d8bfa;
     width: 95%;
     max-width: 1500px;
+    
 }
 
 .AdminStocksView-th {
