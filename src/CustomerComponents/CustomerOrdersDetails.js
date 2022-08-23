@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { db } from '../Firebase-config';
-import { collection, query, getDocs, where,updateDoc,doc } from 'firebase/firestore';
+import { collection, query, getDocs, where, updateDoc, doc } from 'firebase/firestore';
 import './CustomerOrdersDetails.css'
 
 function CustomerOrdersDetails() {
 
-    const [orderStatus,setOrderStatus] = useState("");
+    const [orderStatus, setOrderStatus] = useState("");
 
     const [myOrders, setMyOrders] = useState([]);
     const [scroll, setScroll] = useState(true);
@@ -27,10 +27,14 @@ function CustomerOrdersDetails() {
     }, [scroll, q1])
 
     const update = async (id) => {
-        const orderDoc = doc(db, "customerOrders", id);
-        const newFields = { orderStatus: orderStatus };
-        await updateDoc(orderDoc, newFields);
-        alert("Order status updated!");
+        if (orderStatus === "") {
+            alert("Please select the order status!")
+        } else {
+            const orderDoc = doc(db, "customerOrders", id);
+            const newFields = { orderStatus: orderStatus };
+            await updateDoc(orderDoc, newFields);
+            alert("Order status updated!");
+        }
     }
 
     return (
@@ -58,13 +62,13 @@ function CustomerOrdersDetails() {
                             <h2 className='customermyorders-h2'>Update Order Status</h2>
                             <hr></hr>
                             <br></br>
-                            <select onChange={(e)=>setOrderStatus(e.target.value)} className='customermyorders-select' >
+                            <select onChange={(e) => setOrderStatus(e.target.value)} className='customermyorders-select' >
                                 <option></option>
                                 <option value="Order Received">Order Received</option>
                             </select>
                             <br></br>
                             <br></br>
-                            <button onClick={()=>update(order.id)} className='customermyorders-button' >Update</button>
+                            <button onClick={() => update(order.id)} className='customermyorders-button' >Update</button>
                             <br></br>
                             <br></br>
                             <hr></hr>

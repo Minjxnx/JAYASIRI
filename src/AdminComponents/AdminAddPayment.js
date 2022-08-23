@@ -15,8 +15,14 @@ function AdminAddPayment() {
     const paymentsCollectionRef = collection(db, "payments");
 
     const add = async () => {
-        await addDoc(paymentsCollectionRef, { price: Number(price), details: details });
-        alert("Stock Added Successfully!");
+        if (details === "") {
+            alert("Please enter the order details!")
+        } else if (price === 0) {
+            alert("Please enter the Payment Price!")
+        } else {
+            await addDoc(paymentsCollectionRef, { price: Number(price), details: details });
+            alert("Stock Added Successfully!");
+        }
     }
 
     useEffect(() => {
@@ -48,8 +54,8 @@ function AdminAddPayment() {
     }
 
     const navigate = useNavigate();
-    const update = (id,details,price) => {
-        navigate('/adminpaymentupdate', { state: { paymentID: id,details:details,price:price } });
+    const update = (id, details, price) => {
+        navigate('/adminpaymentupdate', { state: { paymentID: id, details: details, price: price } });
     }
 
     return (
@@ -88,9 +94,9 @@ function AdminAddPayment() {
                                     <td className='AdminSupplierOrdersView-td'>{pay.details}</td>
                                     <td className='AdminSupplierOrdersView-td'>{pay.price}</td>
                                     <td className='AdminSupplierOrdersView-td'>
-                                        <button onClick={()=>update(pay.id,pay.details,pay.price)} className='AdminAddPayments-btn'>Update</button>
+                                        <button onClick={() => update(pay.id, pay.details, pay.price)} className='AdminAddPayments-btn'>Update</button>
                                         &nbsp;&nbsp;&nbsp;
-                                        <button onClick={()=>deletePayment(pay.id)} className='AdminAddPayments-btn'>Delete</button>
+                                        <button onClick={() => deletePayment(pay.id)} className='AdminAddPayments-btn'>Delete</button>
                                     </td>
                                 </tr>
                             </>

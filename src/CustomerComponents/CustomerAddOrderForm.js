@@ -19,8 +19,14 @@ function CustomerAddOrderForm() {
     const customersCollectionRef = collection(db, "customerOrders");
 
     const order = async () => {
-        await addDoc(customersCollectionRef, {orderPrice:Number() ,uId: user.uid, orderDate: Date(today), orderDetails: orderDetails, address: address, deliveryType: delivery, orderStatus:"Pending" });
-        alert("Order Created Successfully!");
+        if (delivery === "") {
+            alert("Please select a delivery type! ")
+        } else if (delivery === "Delivery" && address === "") {
+            alert("Please add the address!")
+        } else {
+            await addDoc(customersCollectionRef, { orderPrice: Number(), uId: user.uid, orderDate: Date(today), orderDetails: orderDetails, address: address, deliveryType: delivery, orderStatus: "Pending" });
+            alert("Order Created Successfully!");
+        }
     }
 
     return (
@@ -34,7 +40,7 @@ function CustomerAddOrderForm() {
                                 <input type="file" placeholder="file" className="CustomerAddOrderForm-name" />
                             </div>
                             <div className="CustomerAddOrderForm-second-input">
-                                <textarea onChange={(event) => { setOrderDetails(event.target.value) }} type="text" placeholder="Order Details" className="CustomerAddOrderForm-name" />
+                                <textarea onChange={(event) => { setOrderDetails(event.target.value) }} type="text" placeholder="Order Details (Optional)" className="CustomerAddOrderForm-name" />
                             </div>
                             <br></br>
                             <hr></hr>

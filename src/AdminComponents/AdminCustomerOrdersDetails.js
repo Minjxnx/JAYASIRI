@@ -9,8 +9,8 @@ function AdminCustomerOrdersDetails() {
     const [myOrders, setMyOrders] = useState([]);
     const [scroll, setScroll] = useState(true);
 
-    const [orderStatus,setOrderStatus] = useState("");
-    const [orderPrice, setOrderPrice] = useState();
+    const [orderStatus, setOrderStatus] = useState("");
+    const [orderPrice, setOrderPrice] = useState(0);
 
     const location = useLocation();
     const q1 = query(collection(db, "customerOrders"), where("__name__", "==", location.state.orderID));
@@ -28,17 +28,25 @@ function AdminCustomerOrdersDetails() {
     }, [scroll, q1])
 
     const updatePrice = async (id) => {
-        const orderDoc = doc(db, "customerOrders", id);
-        const newFields = { orderPrice: Number(orderPrice) };
-        await updateDoc(orderDoc, newFields);
-        alert("Order Price updated!");
+        if (orderPrice === 0) {
+            alert("Please enter the order price!")
+        } else {
+            const orderDoc = doc(db, "customerOrders", id);
+            const newFields = { orderPrice: Number(orderPrice) };
+            await updateDoc(orderDoc, newFields);
+            alert("Order Price updated!");
+        }
     }
 
     const updateOrderStatus = async (id) => {
-        const orderDoc = doc(db, "customerOrders", id);
-        const newFields = { orderStatus: orderStatus };
-        await updateDoc(orderDoc, newFields);
-        alert("Order Status updated!");
+        if (orderStatus === "") {
+            alert("Please select the order status!")
+        } else {
+            const orderDoc = doc(db, "customerOrders", id);
+            const newFields = { orderStatus: orderStatus };
+            await updateDoc(orderDoc, newFields);
+            alert("Order Status updated!");
+        }
     }
 
     return (
@@ -70,7 +78,7 @@ function AdminCustomerOrdersDetails() {
                             <h2 className='admincustomermyorders-h2'>Update Order Status</h2>
                             <hr></hr>
                             <br></br>
-                            <select onChange={(e)=>setOrderStatus(e.target.value)} className='admincustomermyorders-select' >
+                            <select onChange={(e) => setOrderStatus(e.target.value)} className='admincustomermyorders-select' >
                                 <option></option>
                                 <option value="Order Confirmed">Order Confirmed</option>
                                 <option value="Order Rejected">Order Rejected</option>
@@ -81,7 +89,7 @@ function AdminCustomerOrdersDetails() {
                             </select>
                             <br></br>
                             <br></br>
-                            <button onClick={()=>updateOrderStatus(order.id)} className='admincustomermyorders-button' >Update</button>
+                            <button onClick={() => updateOrderStatus(order.id)} className='admincustomermyorders-button' >Update</button>
                             <br></br>
                             <br></br>
                             <hr></hr>
@@ -91,10 +99,10 @@ function AdminCustomerOrdersDetails() {
                             <h2 className='admincustomermyorders-h2'>Add Price</h2>
                             <hr></hr>
                             <br></br>
-                            <input onChange={(e)=>setOrderPrice(e.target.value)} className='admincustomermyorders-input' placeholder='Price' />
+                            <input onChange={(e) => setOrderPrice(e.target.value)} className='admincustomermyorders-input' placeholder='Price' />
                             <br></br>
                             <br></br>
-                            <button onClick={()=>updatePrice(order.id)} className='admincustomermyorders-button' >Add Price</button>
+                            <button onClick={() => updatePrice(order.id)} className='admincustomermyorders-button' >Add Price</button>
                             <br></br>
                             <br></br>
                             <hr></hr>

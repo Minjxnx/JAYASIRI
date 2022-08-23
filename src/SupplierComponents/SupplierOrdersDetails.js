@@ -7,7 +7,7 @@ import { collection, query, getDocs, where, updateDoc, doc } from 'firebase/fire
 function SupplierOrdersDetails() {
 
     const [orderStatus, setOrderStatus] = useState("");
-    const [price, setPrice] = useState("");
+    const [price, setPrice] = useState(0);
 
     const [myOrders, setMyOrders] = useState([]);
     const [scroll, setScroll] = useState(true);
@@ -28,17 +28,25 @@ function SupplierOrdersDetails() {
     }, [scroll, q1])
 
     const updateStatus = async (id) => {
-        const orderDoc = doc(db, "supplierOrders", id);
-        const newFields = { status: orderStatus };
-        await updateDoc(orderDoc, newFields);
-        alert("Order status updated!");
+        if (orderStatus === "") {
+            alert("Please select the order Status!")
+        } else {
+            const orderDoc = doc(db, "supplierOrders", id);
+            const newFields = { status: orderStatus };
+            await updateDoc(orderDoc, newFields);
+            alert("Order status updated!");
+        }
     }
 
     const updatePrice = async (id) => {
-        const orderDoc = doc(db, "supplierOrders", id);
-        const newFields = { price: price };
-        await updateDoc(orderDoc, newFields);
-        alert("Order Price updated!");
+        if (price === 0) {
+            alert("Please Enter the Order Price!")
+        } else {
+            const orderDoc = doc(db, "supplierOrders", id);
+            const newFields = { price: Number(price) };
+            await updateDoc(orderDoc, newFields);
+            alert("Order Price updated!");
+        }
     }
 
     return (
@@ -61,7 +69,7 @@ function SupplierOrdersDetails() {
                                 <h2 className='suppliermyorders-h2'>Add Price</h2>
                                 <hr></hr>
                                 <br></br>
-                                <input onChange={(e)=>setPrice(e.target.value)} className='suppliermyorders-input' type='number' placeholder='Price'></input>
+                                <input onChange={(e) => setPrice(e.target.value)} className='suppliermyorders-input' type='number' placeholder='Price'></input>
                                 <br></br>
                                 <br></br>
                                 <button onClick={() => updatePrice(order.id)} className='suppliermyorders-button' >Add</button>
@@ -72,7 +80,7 @@ function SupplierOrdersDetails() {
                                 <h2 className='suppliermyorders-h2'>Order Status</h2>
                                 <hr></hr>
                                 <br></br>
-                                <select onChange={(e)=>setOrderStatus(e.target.value)} className='suppliermyorders-select' >
+                                <select onChange={(e) => setOrderStatus(e.target.value)} className='suppliermyorders-select' >
                                     <option>Pending</option>
                                     <option value="Order Confirmed">Order Confirmed</option>
                                     <option value="Order Rejected">Order Rejected</option>

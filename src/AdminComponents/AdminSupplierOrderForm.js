@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import './AdminSupplierOrderForm.css';
 import { useLocation } from 'react-router-dom'
 import { db } from '../Firebase-config';
@@ -15,12 +15,16 @@ function AdminSupplierOrderForm() {
     const suppliersCollectionRef = collection(db, "supplierOrders");
 
     const order = async () => {
-        await addDoc(suppliersCollectionRef, {date:Date(today),status:"Pending", price:Number(),details:orderDetails, supplierId:location.state.supplierID });
-        alert("Order Created Successfully!");
+        if (orderDetails === "") {
+            alert("Please enter the order details")
+        } else {
+            await addDoc(suppliersCollectionRef, { date: Date(today), status: "Pending", price: Number(), details: orderDetails, supplierId: location.state.supplierID });
+            alert("Order Created Successfully!");
+        }
     }
 
-  return (
-    <>
+    return (
+        <>
             <div className="AdminSupplierOrderForm-main">
                 <div className="AdminSupplierOrderForm-sub-main">
                     <div className="AdminSupplierOrderForm-sub-sub-main">
@@ -41,7 +45,7 @@ function AdminSupplierOrderForm() {
                 </div>
             </div>
         </>
-  )
+    )
 }
 
 export default AdminSupplierOrderForm
