@@ -67,13 +67,19 @@ function AdminCustomerOrdersDetails() {
                             <br></br>
                             <label className='admincustomermyorders-label'>Order Price : {order.orderPrice}</label>
                             <br></br>
-                            <label className='admincustomermyorders-label'>Delivery Type : {order.deliveryType}</label>
+                            <label className='admincustomermyorders-label'>Delivery Type : {order.deliveryType} {order.deliveryType==="Delivery"?(<><a href={"https://www.latlong.net/c/?lat="+order.lat+"&long="+order.lng+""} target="_blank" rel="noopener noreferrer">Check Location</a></>):(<></>)}</label>
                             <br></br>
                             <label className='admincustomermyorders-label'>Address : {order.address}</label>
                             <br></br>
                             <hr></hr>
                             <br></br>
-
+                            <br></br>
+                            <h2 className='admincustomermyorders-h2'>Prescription</h2>
+                            <hr></hr>
+                            <br></br>
+                            <img alt='image1' className='admincustomermyorders-img' src={order.prescription[0]} />
+                            <hr></hr>
+                            <br></br>
                             <br></br>
                             <h2 className='admincustomermyorders-h2'>Update Order Status</h2>
                             <hr></hr>

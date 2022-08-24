@@ -83,7 +83,7 @@ function CustomerLoginForm({setIsAuth}) {
                                 </div>
                             </div>
                             <p className="customer-login-form-link">
-                                <a className='customer-login-form-a' href='/'>Forgot password ?</a> Or <a className='customer-login-form-a' href='/customersignup'>Sign Up ?</a>
+                                <a className='customer-login-form-a' href='/customerforgotpassword'>Forgot password ?</a> Or <a className='customer-login-form-a' href='/customersignup'>Sign Up ?</a>
                             </p>
                         </div>
                     </div>

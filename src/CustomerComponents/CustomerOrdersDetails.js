@@ -59,6 +59,14 @@ function CustomerOrdersDetails() {
                             <br></br>
 
                             <br></br>
+                            <h2 className='customermyorders-h2'>Prescription</h2>
+                            <hr></hr>
+                            <br></br>
+                            <img alt='image1' className='customermyorders-img' src={order.prescription[0]} />
+                            <hr></hr>
+                            <br></br>
+
+                            <br></br>
                             <h2 className='customermyorders-h2'>Update Order Status</h2>
                             <hr></hr>
                             <br></br>

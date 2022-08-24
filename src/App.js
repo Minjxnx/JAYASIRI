@@ -8,6 +8,7 @@ import CustomerSignup from './CustomerComponents/CustomerPages/CustomerSignup';
 import CustomerAddOrder from './CustomerComponents/CustomerPages/CustomerAddOrder';
 import CustomerMyOrders from './CustomerComponents/CustomerPages/CustomerMyOrders';
 import CustomerMyOrdersDetails from './CustomerComponents/CustomerPages/CustomerMyOrderDetails';
+import CustomerForgotPassword from './CustomerComponents/CustomerForgotPassword';
 import SupplierLogin from './SupplierComponents/SupplierPages/SupplierLogin';
 import SupplierSignup from './SupplierComponents/SupplierPages/SupplierSignup';
 import SupplierMyOrders from './SupplierComponents/SupplierPages/SupplierMyOrders';
@@ -44,6 +45,7 @@ function App() {
         <Route path='/customeraddorder' element={<CustomerAddOrder isAuth={isAuth}/>}/>
         <Route path='/customermyorders' element={<CustomerMyOrders isAuth={isAuth}/>}/>
         <Route path='/customermyorderdetails' element={<CustomerMyOrdersDetails isAuth={isAuth}/>}/>
+        <Route path='/customerforgotpassword' element={<CustomerForgotPassword/>}/>
         <Route path='/supplierlogin' element={<SupplierLogin setSupplierAuth={setSupplierAuth} setSupplierId={setSupplierId}/>}/>
         <Route path='/suppliersignup' element={<SupplierSignup adminAuth={adminAuth}/>}/>
         <Route path='/suppliermyorders' element={<SupplierMyOrders supplierAuth={supplierAuth} supplierId={supplierId}/>}/>

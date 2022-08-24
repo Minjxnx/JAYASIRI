@@ -20,7 +20,7 @@ function CustomerSignupForm({setIsAuth}) {
             localStorage.setItem("isAuth", true);
             setIsAuth(true);
             alert("Successfully created an account!");
-            navigate("/customeraddorder");
+            navigate("/customerlogin");
         })
         .catch((error) => {
             //const errorCode = error.code;
