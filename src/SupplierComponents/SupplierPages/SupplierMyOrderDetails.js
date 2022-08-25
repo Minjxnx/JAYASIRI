@@ -5,7 +5,7 @@ import Details from '../SupplierOrdersDetails';
 function SupplierMyOrderDetails({supplierAuth}) {
   return (
     <>
-    {supplierAuth?(<>
+    {supplierAuth || localStorage.getItem("SupplierAuth", true)?(<>
       <Navbar/>
       <Details/>
       </>):(<>

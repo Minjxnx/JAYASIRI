@@ -5,7 +5,7 @@ import Form from '../AdminPaymentUpdate';
 function AdminPaymentsUpdate({adminAuth}) {
     return (
         <>
-          {adminAuth ? (<>
+          {adminAuth || localStorage.getItem("AdminAuth", true) ? (<>
             <Navbar />
             <Form />
           </>) : (<>

@@ -5,7 +5,7 @@ import Orders from '../AdminSupplierOrdersView';
 function AdminSupplierOrdersView({adminAuth}) {
   return (
     <>
-      {adminAuth ? (<>
+      {adminAuth || localStorage.getItem("AdminAuth", true) ? (<>
         <Navbar />
         <Orders />
       </>) : (<>

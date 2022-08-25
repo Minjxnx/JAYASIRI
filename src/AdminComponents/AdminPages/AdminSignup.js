@@ -5,7 +5,7 @@ import AdminNavbar from '../AdminNavbar';
 function AdminSignup({adminAuth}) {
   return (
     <>
-      {adminAuth ? (<>
+      {adminAuth || localStorage.getItem("AdminAuth", true) ? (<>
         <AdminNavbar />
         <AdminSignupForm />
       </>) : (<>

@@ -5,7 +5,7 @@ import SupplierOrders from '../SupplierOrders';
 function SupplierMyOrders({ supplierAuth , supplierId}) {
   return (
     <>
-      {supplierAuth ? (<>
+      {supplierAuth || localStorage.getItem("SupplierAuth", true) ? (<>
         <NavBar />
         <SupplierOrders supplierId={supplierId}/>
       </>) : (<>

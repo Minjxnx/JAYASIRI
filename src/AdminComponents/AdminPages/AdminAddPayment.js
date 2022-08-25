@@ -5,7 +5,7 @@ import Addpayment from '../AdminAddPayment';
 function AdminAddPayment({adminAuth}) {
   return (
     <>
-      {adminAuth ? (<>
+      {adminAuth || localStorage.getItem("AdminAuth", true) ? (<>
         <Navbar />
         <Addpayment />
       </>) : (<>

@@ -5,7 +5,7 @@ import Form from '../AdminAddStocksForm';
 function AdminAddStocks({adminAuth}) {
   return (
     <>
-      {adminAuth ? (<>
+      {adminAuth || localStorage.getItem("AdminAuth", true) ? (<>
         <Navbar />
         <Form />
       </>) : (<>

@@ -5,7 +5,7 @@ import Navbar from '../AdminNavbar';
 function AdminSuppliers({adminAuth}) {
   return (
     <>
-      {adminAuth ? (<>
+      {adminAuth || localStorage.getItem("AdminAuth", true) ? (<>
         <Navbar />
         <Suppliers />
       </>) : (<>

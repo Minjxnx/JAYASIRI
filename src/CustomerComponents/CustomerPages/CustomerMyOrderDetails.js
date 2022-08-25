@@ -5,7 +5,7 @@ import Details from '../CustomerOrdersDetails';
 function CustomerMyOrderDetails({ isAuth }) {
   return (
     <>
-      {isAuth ? (
+      {isAuth || localStorage.getItem("isAuth",true) ? (
         <>
           <Navbar />
           <Details />

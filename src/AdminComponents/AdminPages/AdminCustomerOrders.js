@@ -5,7 +5,7 @@ import Orders from '../AdminCustomerOrders';
 function AdminCustomerOrders({ adminAuth }) {
   return (
     <>
-      {adminAuth ? (<>
+      {adminAuth || localStorage.getItem("AdminAuth", true) ? (<>
         <Navbar />
         <Orders />
       </>) : (<>

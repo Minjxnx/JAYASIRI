@@ -5,7 +5,7 @@ import View from '../AdminStocksView';
 function AdminStocks({adminAuth}) {
   return (
     <>
-      {adminAuth ? (<>
+      {adminAuth || localStorage.getItem("AdminAuth", true) ? (<>
         <Navbar />
         <View />
       </>) : (<>
