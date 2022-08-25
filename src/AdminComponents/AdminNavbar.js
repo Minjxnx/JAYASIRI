@@ -13,7 +13,7 @@ function AdminNavbar() {
             <nav className='navbar'>
             <div className='navbar-container'>
                 <Link to="/" className='navbar-logo-word'>
-                <img src={process.env.PUBLIC_URL + "Logos/PharmacyLogo.png"} className='navbar-logo' alt='' />
+                <img src="gs://jayasiri-pharmacy.appspot.com/Logo/PharmacyLogo.png" className='navbar-logo' alt='logo' />
                    &nbsp;JAYASIRI Pharmacy
                 </Link>
                 <div className='menu-icon' onClick={handleClick}>
