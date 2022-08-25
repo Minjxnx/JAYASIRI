@@ -34,8 +34,11 @@ function CustomerForgotPassword() {
                                 <input onChange={(event) => { setEmail(event.target.value); }} type="text" placeholder="Enter Email" className="CustomerForgotPassword-form-name" />
                             </div>
                             <div className="CustomerForgotPassword-form-login-button">
-                                <button onClick={sendEmail} className='CustomerForgotPassword-form-button'>Send</button>
+                                <button onClick={sendEmail} className='CustomerForgotPassword-form-button'>Enter</button>
                             </div>
+                            <p className="CustomerForgotPassword-form-link">
+                                <a className='CustomerForgotPassword-form-a' href='/customerlogin'>Login ?</a>
+                            </p>
                         </div>
                     </div>
                 </div>
